@@ -235,7 +235,7 @@ sup {
 }
 
 a {
-    color: white;
+    color: black;
     text-decoration: underline;
     padding-right: 30px;
 }
@@ -7824,8 +7824,11 @@ textarea.form-control-lg {
 }
 
 .bg-light {
-  --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .bg-dark {

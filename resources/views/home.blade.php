@@ -20,4 +20,7 @@
         </div>
     </div>
 </div>
+@component('layouts.footer')
+@endcomponent
 @endsection
+
