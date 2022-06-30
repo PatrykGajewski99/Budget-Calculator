@@ -16,10 +16,10 @@ class CreateFoodsTable extends Migration
         Schema::create('foods', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->timestamps();
             $table->string('shopName');
-            $table->float('price');
+            $table->decimal('price',9,2);
             $table->string('details');
+            $table->date('date');
         });
     }
 

@@ -16,10 +16,10 @@ class CreateBillsTable extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->timestamps();
             $table->string('company');
-            $table->float('price');
+            $table->decimal('price',9,2);
             $table->string('details');
+            $table->date('date');
         });
     }
 

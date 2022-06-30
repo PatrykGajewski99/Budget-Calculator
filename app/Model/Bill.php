@@ -15,15 +15,8 @@ class Bill extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id','company','price','details',
+        'user_id','company','price','details','date',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+
 }

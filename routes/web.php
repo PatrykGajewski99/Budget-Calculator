@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,16 +19,17 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
+//Admin routes
 Route::get('/adminDashBoard', function () {
     return view('adminDashBoard');
 })->name('adminDash')->middleware('admin.privilege');
 
 Route::get('/', function () {
     return view('allUsers');
-})->name('allusers')->middleware('admin.privilege');
+})->name('/allusers')->middleware('admin.privilege');
 
 
-Route::get('allusers',[AdminController::class,'index'])->name("showUsers")->middleware('admin.privilege');
+Route::get('/allusers',[AdminController::class,'index'])->name("showUsers")->middleware('admin.privilege');
 
 Route::get('delete_user/{id}',[AdminController::class,'destroy'])->name("delete")->middleware('admin.privilege');
 
@@ -36,6 +38,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //User routes
+Route::get('/addExpense',function (){
+  return(view('addExpense'));
+})->name('expenseDash')->middleware('user.privilege');
+
+Route::post('/expense',[UserController::class,'addExpense'])->name("addExpense")->middleware('user.privilege');
 
 Route::get('/userDashBoard', function () {
     return view('userDashBoard');

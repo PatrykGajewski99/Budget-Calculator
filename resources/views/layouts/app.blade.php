@@ -77,7 +77,19 @@
                                     @csrf
                                 </form>
                             </li>
+                        @else
+                                <!-- User functions-->
 
+                            <li class="nav-item">
+
+                                <a class="nav-link" href="{{ route('expenseDash') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('expenseDash').submit();">
+                                    {{ __('Expense') }}</a>
+                                <form id="expenseDash" action="{{ route('expenseDash') }}" method="get" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
                             @endif
                         <li class="nav-item">
 

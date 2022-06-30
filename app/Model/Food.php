@@ -15,15 +15,7 @@ class Food extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id','shopName','price','details',
+        'user_id','shopName','price','details','date',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 }

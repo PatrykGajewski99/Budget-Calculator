@@ -16,10 +16,10 @@ class CreatePartyTable extends Migration
         Schema::create('party', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->timestamps();
             $table->string('place');
-            $table->float('price');
+            $table->decimal('price',9,2);
             $table->string('details');
+            $table->date('date');
         });
     }
 

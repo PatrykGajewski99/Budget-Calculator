@@ -291,6 +291,7 @@
                 </tr>
                 </thead>
                 <tbody>
+                @if(isset($users))
                     @foreach($users as $user)
                 <tr>
                     <td>{{$user->privilege}}</td>
@@ -299,10 +300,11 @@
                     <td>{{$user->email}}</td>
                     <td>{{$user->created_at}}</td>
                     <td>
-                        <a href="{{route('delete',$user->id)}}" class="delete" data-toggle="modal" onclick="return confirm('Czy na pewno chcesz usunąć osobę?')"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                        <a href="{{route('delete',$user->id)}}" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć osobę?')" >DELETE</a>
                     </td>
                 </tr>
                     @endforeach
+                @endif
                 </tbody>
             </table>
         </div>

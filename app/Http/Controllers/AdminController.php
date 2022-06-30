@@ -85,6 +85,6 @@ class AdminController extends Controller
     public function destroy($id)
     {
        DB::delete('delete from users where id =? ',[$id]);
-        return redirect()->route('allusers');
+        return redirect()->route('showUsers');
     }
 }
