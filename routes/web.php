@@ -14,11 +14,9 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
-
-// Admin routes
 
 Route::get('/adminDashBoard', function () {
     return view('adminDashBoard');
