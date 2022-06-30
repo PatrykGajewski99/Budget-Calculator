@@ -14,9 +14,7 @@
                             <label for="privilege" class="col-md-4 col-form-label text-md-right">{{ __('Privilege') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="privilege" id="privilege" required autofocus>
-                                    <option value="">Choose privilege</option>
-                                    <option value="admin">Admin</option>
+                                <select class="form-control" name="privilege" id="privilege" required autofocus disabled>
                                     <option value="user">User</option>
                                 </select>
                                 @error('privilege')
@@ -27,19 +25,31 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" >
+                                <input id="name" type="text" class="form-control @error('firstName') is-invalid @enderror" name="firstName" value="{{ old('firstName') }}" required  >
 
-                                @error('name')
+                                @error('firstName')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
 
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('lastName') is-invalid @enderror" name="lastName" value="{{ old('lastName') }}" required  >
+
+                                @error('lastName')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
