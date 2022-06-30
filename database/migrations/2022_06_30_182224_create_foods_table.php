@@ -16,7 +16,7 @@ class CreateFoodsTable extends Migration
         Schema::create('foods', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('shopName');
+            $table->string('place');
             $table->decimal('price',9,2);
             $table->string('details');
             $table->date('date');

@@ -5,7 +5,7 @@ use App\Models\User;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class UserController extends Controller
 {
     public function addExpense(Request $request)
@@ -15,7 +15,9 @@ class UserController extends Controller
            'user_id'=>Auth::user()->id,
             'place'=>$request->post('place'),
             'price'=>$request->post('price'),
-            'details'=>$request->post('details')
+            'details'=>$request->post('details'),
+            'date'=>Carbon::now()->format('Y-m-d'),
         ]);
+        return redirect('addExpense');
     }
 }
