@@ -60,11 +60,11 @@
                             @if(Auth::user()->privilege=="admin")
                                     <a class="dropdown-item" href="{{ route('showUsers') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getElementById('showUsers').submit();">
                                         {{ __('Users') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('showUsers') }}" method="POST" class="d-none">
+                                    <form id="showUsers" action="{{ route('showUsers') }}" method="get" class="d-none">
                                         @csrf
                                     </form>
                             @endif
