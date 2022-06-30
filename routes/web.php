@@ -18,7 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('allusers',[AdminController::class,'showUsers'])->name("showUsers")->middleware('admin.privilege');
+Route::get('/', function () {
+    return view('allUsers');
+})->name('allusers')->middleware('admin.privilege');
+
+Route::get('allusers',[AdminController::class,'index'])->name("showUsers")->middleware('admin.privilege');
+
+Route::get('delete_user/{id}',[AdminController::class,'destroy'])->name("delete")->middleware('admin.privilege');
 
 Auth::routes();
 

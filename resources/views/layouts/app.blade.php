@@ -49,35 +49,36 @@
                             </li>
                         @endif
                     @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->firstName}} {{Auth::user()->lastName}} ({{Auth::user()->privilege}})
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                <!-- Admin functions -->
+                        <!-- Admin functions -->
 
-                            @if(Auth::user()->privilege=="admin")
-                                    <a class="dropdown-item" href="{{ route('showUsers') }}"
-                                       onclick="event.preventDefault();
+                        @if(Auth::user()->privilege=="admin")
+                        <li class="nav-item">
+
+                            <a class="nav-link" href="{{ route('showUsers') }}"
+                               onclick="event.preventDefault();
                                                      document.getElementById('showUsers').submit();">
-                                        {{ __('Users') }}
-                                    </a>
+                                {{ __('Users') }}</a>
+                            <form id="showUsers" action="{{ route('showUsers') }}" method="get" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
 
-                                    <form id="showUsers" action="{{ route('showUsers') }}" method="get" class="d-none">
-                                        @csrf
-                                    </form>
                             @endif
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
+                        <li class="nav-item">
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
+                            <a class="nav-link" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <a id="navbarDropdown" class="nav-link"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                              <strong style="color: black"> {{ Auth::user()->firstName}} {{Auth::user()->lastName}} ({{Auth::user()->privilege}})</strong>
+                            </a>
                         </li>
                     @endguest
                 </ul>
