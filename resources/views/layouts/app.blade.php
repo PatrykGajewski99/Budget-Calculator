@@ -63,6 +63,16 @@
                                 @csrf
                             </form>
                         </li>
+                            <li class="nav-item">
+
+                                <a class="nav-link" href="{{ route('adminDash') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('adminDash').submit();">
+                                    {{ __('Dashboard') }}</a>
+                                <form id="adminDash" action="{{ route('adminDash') }}" method="get" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
 
                             @endif
                         <li class="nav-item">

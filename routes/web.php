@@ -18,9 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Admin routes
+
+Route::get('/adminDashBoard', function () {
+    return view('adminDashBoard');
+})->name('adminDash')->middleware('admin.privilege');
+
 Route::get('/', function () {
     return view('allUsers');
 })->name('allusers')->middleware('admin.privilege');
+
 
 Route::get('allusers',[AdminController::class,'index'])->name("showUsers")->middleware('admin.privilege');
 
@@ -29,3 +36,9 @@ Route::get('delete_user/{id}',[AdminController::class,'destroy'])->name("delete"
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//User routes
+
+Route::get('/userDashBoard', function () {
+    return view('userDashBoard');
+})->name('userDash')->middleware('user.privilege');
