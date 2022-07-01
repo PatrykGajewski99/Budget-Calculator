@@ -14,7 +14,7 @@ class UserController extends Controller
     {
         $tableName=$request->post('expense');
         DB::table($tableName)->insert([
-           'user_id'=>Auth::user()->id,
+            'user_id'=>Auth::user()->id,
             'place'=>$request->post('place'),
             'price'=>$request->post('price'),
             'details'=>$request->post('details'),
@@ -28,6 +28,17 @@ class UserController extends Controller
         $id=Auth::user()->id;
         $data=DB::SELECT('SELECT * FROM foods WHERE user_id=?',[$id]);
         return view('food-expenses',['data'=>$data]);
+    }
+    public function getExpenses($table_name)
+    {
+        $id=Auth::user()->id;
+        if($table_name=='foods')
+        $data=DB::SELECT('SELECT * FROM foods WHERE user_id=?',[$id]);
+        elseif($table_name=='bills')
+            $data=DB::SELECT('SELECT * FROM bills WHERE user_id=?',[$id]);
+        else
+            $data=DB::SELECT('SELECT * FROM party WHERE user_id=?',[$id]);
+        return view('expenses',['data'=>$data]);
     }
     public function sumPrice(Request $request)
     {
@@ -53,12 +64,16 @@ class UserController extends Controller
             {
                 $finalPrice=$row->price;
             }
+            if($finalPrice=="")
+            {
+                $finalPrice=0;
+            }
             if((float)$finalPrice<1000.00)
                 Alert::success('Great Job','Your expenses: '.$finalPrice.' zł');
             else
                 Alert::warning('WOW','Your expense are to high: '.$finalPrice.'  zł');
         }
 
-        return redirect('getFoodExpenses');
+        return redirect()->back();
     }
 }

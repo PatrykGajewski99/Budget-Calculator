@@ -81,22 +81,38 @@
                         @else
                                 <!-- User functions-->
                             <li class="nav-item">
-
-                                <a class="nav-link" href="{{ route('getFoodExpenses') }}"
+                                <a class="nav-link" href="{{ route('getExpenses',$table_name='foods') }}"
                                    onclick="event.preventDefault();
-                                                     document.getElementById('getFoodExpenses').submit();">
+                                                     document.getElementById('getFoodsExpenses').submit();">
                                     {{ __('Food Expenses') }}</a>
-                                <form id="getFoodExpenses" action="{{ route('getFoodExpenses') }}" method="get" class="d-none">
+                                <form id="getFoodsExpenses" action="{{ route('getExpenses',$table_name='foods') }}" method="get" class="d-none">
                                     @csrf
                                 </form>
                             </li>
                             <li class="nav-item">
-
-                                <a class="nav-link" href="{{ route('expenseDash') }}"
+                                <a class="nav-link" href="{{ route('getExpenses',$table_name='bills') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('getBillsExpenses').submit();">
+                                    {{ __('Bill Expenses') }}</a>
+                                <form id="getBillsExpenses" action="{{ route('getExpenses',$table_name='bills') }}" method="get" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('getExpenses',$table_name='party') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('getPartyExpenses').submit();">
+                                    {{ __('Party Expenses') }}</a>
+                                <form id="getPartyExpenses" action="{{ route('getExpenses',$table_name='party') }}" method="get" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('expenseDash') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('expenseDash').submit();">
                                     {{ __('Add Expense') }}</a>
-                                <form id="expenseDash" action="{{ route('expenseDash') }}" method="get" class="d-none">
+                                <form id="expenseDash" action="{{route('expenseDash') }}" method="get" class="d-none">
                                     @csrf
                                 </form>
                             </li>

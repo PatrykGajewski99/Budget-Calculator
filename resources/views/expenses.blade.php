@@ -270,29 +270,29 @@ use RealRashid\SweetAlert\Facades\Alert;
 </head>
 <body>
 <div class="container-xl">
-<div class="table-responsive">
-    <div class="table-wrapper">
-        <form class="row" method="get" id="calculate" action="{{route('calculate')}}">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="col-md-12">
-                       <input id="dayFrom" type="date" class="form-control" name="dayFrom" required placeholder="yyyy-mm-dd">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <form class="row" method="get" id="calculate" action="{{route('calculate')}}">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="col-md-12">
+                            <input id="dayFrom" type="date" class="form-control" name="dayFrom" required placeholder="yyyy-mm-dd">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-12">
+                            <input id="dayTo" type="date" class="form-control" name="dayTo" required placeholder="yyyy-mm-dd">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-success" name="calculate" value="foods" >CALCULATE</button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="col-12">
-                      <input id="dayTo" type="date" class="form-control" name="dayTo" required placeholder="yyyy-mm-dd">
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="col-12">
-                    <button type="submit" class="btn btn-success" name="calculate" value="foods" >CALCULATE</button>
-                    </div>
-                </div>
-            </div>
-    </form>
+            </form>
+        </div>
     </div>
-</div>
 </div>
 <div class="container-xl">
     <div class="table-responsive">
@@ -300,7 +300,7 @@ use RealRashid\SweetAlert\Facades\Alert;
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2>Food <b>Expenses</b></h2>
+                        <h2> <b>Expenses</b></h2>
                     </div>
                 </div>
             </div>
