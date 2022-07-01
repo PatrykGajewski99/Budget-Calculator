@@ -18,7 +18,7 @@ class UserController extends Controller
             'place'=>$request->post('place'),
             'price'=>$request->post('price'),
             'details'=>$request->post('details'),
-            'date'=>Carbon::now()->format('Y-m-d'),
+            'created_at'=>Carbon::now()->format('Y-m-d'),
         ]);
         Alert::success('Great Job','Your expense added.');
         return redirect('addExpense');
@@ -29,19 +29,36 @@ class UserController extends Controller
         $data=DB::SELECT('SELECT * FROM foods WHERE user_id=?',[$id]);
         return view('food-expenses',['data'=>$data]);
     }
-    public function sumPrice()
+    public function sumPrice(Request $request)
     {
         $id=Auth::user()->id;
-        $sum=DB::SELECT('SELECT sum(price) as price FROM foods WHERE user_id=?',[$id]);
-        foreach ($sum as $row)
-        {
-            $finalPrice=$row->price;
+        $dataFrom=$request->input('dayFrom');;
+        $timestamp=strtotime($dataFrom);
+        $convertDataFrom=date('Y-m-d',$timestamp);
+        $dataTo=$request->input('dayTo');
+        $timestamp2=strtotime($dataTo);
+        $convertDataTo=date('Y-m-d',$timestamp2);
+        if($convertDataFrom>$convertDataTo) {
+            Alert::error('Fatal Error','Start date must be smaller then end date. ');
         }
-        var_dump($finalPrice);
-        if((float)$finalPrice<100.00)
-        Alert::success('Great Job','Your expenses: '.$finalPrice);
-        else
-            Alert::warning('WOW','Your expense are to hight: '.$finalPrice);
+        else{
+            $tableName=$request->input('calculate');
+            $sum = DB::table($tableName)
+                ->select(DB::raw("SUM(price) as price"))
+                ->where('user_id', '=',$id)
+                ->where('created_at','>=',$convertDataFrom)
+                ->where('created_at','<=',$convertDataTo)
+                ->get();
+            foreach ($sum as $row)
+            {
+                $finalPrice=$row->price;
+            }
+            if((float)$finalPrice<1000.00)
+                Alert::success('Great Job','Your expenses: '.$finalPrice.' zł');
+            else
+                Alert::warning('WOW','Your expense are to high: '.$finalPrice.'  zł');
+        }
+
         return redirect('getFoodExpenses');
     }
 }

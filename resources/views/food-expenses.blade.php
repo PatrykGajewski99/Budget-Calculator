@@ -272,24 +272,25 @@ use RealRashid\SweetAlert\Facades\Alert;
 <div class="container-xl">
 <div class="table-responsive">
     <div class="table-wrapper">
-<div class="row">
-    <div class="col-sm-4">
-        <div class="col-md-12">
-           <input id="dayFrom" type="date" class="form-control" name="dayFrom" required placeholder="yyyy-mm-dd">
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="col-12">
-          <input id="dayTo" type="date" class="form-control" name="dayTo" required placeholder="yyyy-mm-dd">
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="col-12">
-        <a href="{{route('calculate')}}"class="btn btn-success" >CALCULATE</a>
-        </div>
-    </div>
-
-</div>
+        <form class="row" method="get" id="calculate" action="{{route('calculate')}}">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="col-md-12">
+                       <input id="dayFrom" type="date" class="form-control" name="dayFrom" required placeholder="yyyy-mm-dd">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="col-12">
+                      <input id="dayTo" type="date" class="form-control" name="dayTo" required placeholder="yyyy-mm-dd">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="col-12">
+                    <button type="submit" class="btn btn-success" name="calculate" value="foods" >CALCULATE</button>
+                    </div>
+                </div>
+            </div>
+    </form>
     </div>
 </div>
 </div>
@@ -317,7 +318,7 @@ use RealRashid\SweetAlert\Facades\Alert;
                     @foreach($data as $row)
                         <tr>
                             <td>{{$row->place}}</td>
-                            <td>{{$row->date}} </td>
+                            <td>{{$row->created_at}} </td>
                             <td>{{$row->details}}</td>
                             <td>{{$row->price}} zł</td>
                         </tr>

@@ -19,7 +19,7 @@ class CreateBillsTable extends Migration
             $table->string('place');
             $table->decimal('price',9,2);
             $table->string('details');
-            $table->date('date');
+            $table->date('created_at');
         });
     }
 
