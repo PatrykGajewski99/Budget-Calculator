@@ -20,6 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+@include('sweetalert::alert')
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
@@ -79,13 +80,22 @@
                             </li>
                         @else
                                 <!-- User functions-->
+                            <li class="nav-item">
 
+                                <a class="nav-link" href="{{ route('getFoodExpenses') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('getFoodExpenses').submit();">
+                                    {{ __('Food Expenses') }}</a>
+                                <form id="getFoodExpenses" action="{{ route('getFoodExpenses') }}" method="get" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
                             <li class="nav-item">
 
                                 <a class="nav-link" href="{{ route('expenseDash') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('expenseDash').submit();">
-                                    {{ __('Expense') }}</a>
+                                    {{ __('Add Expense') }}</a>
                                 <form id="expenseDash" action="{{ route('expenseDash') }}" method="get" class="d-none">
                                     @csrf
                                 </form>
