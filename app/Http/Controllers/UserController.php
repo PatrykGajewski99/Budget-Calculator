@@ -23,12 +23,6 @@ class UserController extends Controller
         Alert::success('Great Job','Your expense added.');
         return redirect('addExpense');
     }
-    public function getFoodExpenses()
-    {
-        $id=Auth::user()->id;
-        $data=DB::SELECT('SELECT * FROM foods WHERE user_id=?',[$id]);
-        return view('food-expenses',['data'=>$data]);
-    }
     public function getExpenses($table_name)
     {
         $id=Auth::user()->id;

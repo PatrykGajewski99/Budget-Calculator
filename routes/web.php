@@ -52,3 +52,7 @@ Route::get('/userDashBoard', function () {
 Route::get('/calculate',[UserController::class,'sumPrice'])->name('calculate')->middleware('user.privilege');
 
 Route::get('/getExpenses/{table_name}',[UserController::class,'getExpenses'])->name('getExpenses')->middleware('user.privilege');
+
+Route::get('/userDashBoard', function () {
+    return view('userDashBoard');
+})->name('userDash')->middleware('user.privilege');
