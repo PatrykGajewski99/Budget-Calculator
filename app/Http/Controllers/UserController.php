@@ -32,12 +32,10 @@ class UserController extends Controller
     public function getExpenses($table_name)
     {
         $id=Auth::user()->id;
-        if($table_name=='foods')
-        $data=DB::SELECT('SELECT * FROM foods WHERE user_id=?',[$id]);
-        elseif($table_name=='bills')
-            $data=DB::SELECT('SELECT * FROM bills WHERE user_id=?',[$id]);
-        else
-            $data=DB::SELECT('SELECT * FROM party WHERE user_id=?',[$id]);
+        $data=DB::table($table_name)
+            ->select(DB::raw('place,created_at,details,price'))
+            ->where('user_id','=',$id)
+            ->get();
         return view('expenses',['data'=>$data]);
     }
     public function sumPrice(Request $request)
