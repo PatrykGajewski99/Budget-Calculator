@@ -30,8 +30,20 @@ class UserController extends Controller
             ->select(DB::raw('place,created_at,details,price'))
             ->where('user_id','=',$id)
             ->get();
-        return view('expenses',['data'=>$data]);
+        return view($table_name.'Expenses',['data'=>$data]);
     }
+    public function getFillterExpenses($table_name,$dataFrom,$dataTo)
+    {
+        $id=Auth::user()->id;
+        $data=DB::table($table_name)
+            ->select(DB::raw('place,created_at,details,price'))
+            ->where('user_id','=',$id)
+            ->where('created_at','>=',$dataFrom)
+            ->where('created_at','<=',$dataTo)
+            ->get();
+        return $data;
+    }
+
     public function sumPrice(Request $request)
     {
         $id=Auth::user()->id;
@@ -41,11 +53,11 @@ class UserController extends Controller
         $dataTo=$request->input('dayTo');
         $timestamp2=strtotime($dataTo);
         $convertDataTo=date('Y-m-d',$timestamp2);
+        $tableName=$request->input('calculate');
         if($convertDataFrom>$convertDataTo) {
             Alert::error('Fatal Error','Start date must be smaller then end date. ');
         }
         else{
-            $tableName=$request->input('calculate');
             $sum = DB::table($tableName)
                 ->select(DB::raw("SUM(price) as price"))
                 ->where('user_id', '=',$id)
@@ -65,8 +77,8 @@ class UserController extends Controller
             else
                 Alert::warning('WOW','Your expense are to high: '.$finalPrice.'  zł');
         }
-
-        return redirect()->back();
+        $data=$this->getFillterExpenses($tableName,$convertDataFrom,$convertDataTo);
+        return view($tableName.'Expenses',['data'=>$data]);
     }
     public function calculateExpenses()
     {
