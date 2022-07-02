@@ -68,4 +68,39 @@ class UserController extends Controller
 
         return redirect()->back();
     }
+    public function calculateExpenses()
+    {
+        $id=Auth::user()->id;
+        $food = DB::table('foods')
+            ->select(DB::raw("SUM(price) as price"))
+            ->where('user_id', '=',$id)
+            ->get();
+        foreach ($food as $row)
+        {
+            $finalFoodPrice=$row->price;
+        }
+        $bills = DB::table('bills')
+            ->select(DB::raw("SUM(price) as price"))
+            ->where('user_id', '=',$id)
+            ->get();
+        foreach ($bills as $row)
+        {
+            $finalBillsPrice=$row->price;
+        }
+        $parties = DB::table('party')
+            ->select(DB::raw("SUM(price) as price"))
+            ->where('user_id', '=',$id)
+            ->get();
+        foreach ($parties as $row)
+        {
+            $finalPartiesPrice=$row->price;
+        }
+        if($finalPartiesPrice=="")
+            $finalPartiesPrice=0;
+        if($finalFoodPrice=="")
+            $finalFoodPrice=0;
+        if($finalBillsPrice=="")
+            $finalBillsPrice=0;
+        return view('userDashBoard',compact('finalFoodPrice','finalBillsPrice','finalPartiesPrice'));
+    }
 }

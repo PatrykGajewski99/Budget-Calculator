@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    <br><br><br><br><br><br>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('User Dashboard') }}</div>
+                <div class="card-header">{{ __('All my expenses') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,12 +14,41 @@
                         {{ session('status') }}
                     </div>
                     @endif
+                        <div class="row justify-content-center">
 
-                    {{ __('You are logged as User') }}
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="service-item mb-5">
+                                    <i class="fa fa-cutlery fa-5x" aria-hidden="true"></i>
+                                    <p></p>
+                                    <p>You spent on food:  </p>
+                                    <p><strong>{{$finalFoodPrice}} zł</strong></p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="service-item mb-5">
+                                    <i class="fa fa-address-card-o fa-5x" aria-hidden="true"></i>
+                                    <p></p>
+                                    <p>You spent on bills: </p>
+                                    <p><strong>{{$finalBillsPrice}} zł</strong></p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="service-item mb-5">
+                                    <i class="fa fa-glass fa-5x" aria-hidden="true"></i>
+                                    <p></p>
+                                    <p>You spent on parties: </p>
+                                    <p><strong>{{$finalPartiesPrice}} zł</strong></p>
+                                </div>
+                            </div>
+
+                        </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://use.fontawesome.com/a11d10b9af.js"></script>
 </div>
 @component('layouts.footer')
 @endcomponent
