@@ -20,9 +20,7 @@ Route::get('/welcome', function () {
 });
 
 //Admin routes
-Route::get('/adminDashBoard', function () {
-    return view('adminDashBoard');
-})->name('adminDash')->middleware('admin.privilege');
+Route::get('/adminDashBoard',[AdminController::class,'calculateExpenses'])->name('adminDash')->middleware('admin.privilege');
 
 Route::get('/', function () {
     return view('allUsers');

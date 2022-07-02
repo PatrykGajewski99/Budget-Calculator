@@ -21,70 +21,40 @@ class AdminController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
        DB::delete('delete from users where id =? ',[$id]);
         return redirect()->route('showUsers');
+    }
+    public function calculateExpenses()
+    {
+        $food = DB::table('foods')
+            ->select(DB::raw("SUM(price) as price"))
+            ->get();
+        foreach ($food as $row)
+        {
+            $finalFoodPrice=$row->price;
+        }
+        $bills = DB::table('bills')
+            ->select(DB::raw("SUM(price) as price"))
+            ->get();
+        foreach ($bills as $row)
+        {
+            $finalBillsPrice=$row->price;
+        }
+        $parties = DB::table('party')
+            ->select(DB::raw("SUM(price) as price"))
+            ->get();
+        foreach ($parties as $row)
+        {
+            $finalPartiesPrice=$row->price;
+        }
+        if($finalPartiesPrice=="")
+            $finalPartiesPrice=0;
+        if($finalFoodPrice=="")
+            $finalFoodPrice=0;
+        if($finalBillsPrice=="")
+            $finalBillsPrice=0;
+        return view('adminDashBoard',compact('finalFoodPrice','finalBillsPrice','finalPartiesPrice'));
     }
 }
